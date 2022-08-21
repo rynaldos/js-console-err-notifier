@@ -10,7 +10,9 @@
     O = {};
 
     // All possible standard methods to provide an interface for
-    consoleMethods = ["debug", "error", "exception", "info", "log", "trace", "warn"];
+    // consoleMethods = ["debug", "error", "exception", "info", "log", "trace", "warn"];
+    consoleMethods = ["error"];
+
 
     // Holds handlers to be executed for every method
     allHandlers = [];
