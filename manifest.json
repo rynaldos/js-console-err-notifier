@@ -2,26 +2,45 @@
   "name": "JS console error notifier",
   "version": "0.1",
   "description": "Show console errors directly in the webpage",
-  "icons": { "16": "/icons/icon16.png",
-             "32": "/icons/icon32.png",
-             "48": "/icons/icon48.png",
-            "128": "/icons/icon128.png" },
-  "manifest_version": 2,
-  "web_accessible_resources": ["/src/console-listener.js",
-        "alertify.min.js",
-        "fonts/Roboto-Regular.ttf"
-],
-  "permissions": ["tabs", "webRequest"],
-  "content_scripts": [
+  "icons": {
+    "16": "/icons/icon16.png",
+    "32": "/icons/icon32.png",
+    "48": "/icons/icon48.png",
+    "128": "/icons/icon128.png"
+  },
+  "manifest_version": 3,
+  "web_accessible_resources": [
     {
-      "matches": ["https://*/*", "http://*/*"],
-      "run_at": "document_start",
-      "css": [
-        "/src/alertify.min.css" ],
-      "js": [
+      "resources": [
+        "alertify.min.js",
+        "fonts/Roboto-Regular.ttf",
+        "/src/alertify.min.css",
         "contentScript.js",
-        "alertify.min.js" ]
+        "alertify.min.js",
+        "/src/background.js",
+        "/src/console-listener.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
     }
   ],
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+  "action": {
+    "default_title": "Click to show an alert"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
 }
